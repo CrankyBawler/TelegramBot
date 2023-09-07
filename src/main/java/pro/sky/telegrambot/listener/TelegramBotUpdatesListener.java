@@ -100,8 +100,4 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
             });
             return list;
         }
-
 }
-
-
-

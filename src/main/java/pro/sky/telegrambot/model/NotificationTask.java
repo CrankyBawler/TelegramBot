@@ -5,42 +5,69 @@ import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Entity
-//public class NotificationTask {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
-//    @Column(name = "User_id")
-//    private Long userId;
-//    private String text;
-//    private LocalDateTime date;
 
-//}
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table (name = "notification_Task")
-
-@ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Builder
 public class NotificationTask {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
-    @Getter
     private Long id;
-    @Getter
-    private Long chatId;
-    @Getter
-    private String taskText;
-    @Getter
-    private LocalDateTime performDate;
+    @Column(name = "User_id")
+    private Long userId;
+    private String text;
+    private LocalDateTime date;
 
-    public NotificationTask(Long chatId, Long id, String taskText, LocalDateTime performDate) {
-        this.chatId = chatId;
-        this.taskText = taskText;
-        this.performDate = performDate;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NotificationTask that = (NotificationTask) o;
+        return Objects.equals(id, that.id) && Objects.equals(userId, that.userId) && Objects.equals(text, that.text) && Objects.equals(date, that.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, userId, text, date);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 }

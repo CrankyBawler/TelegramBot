@@ -55,14 +55,14 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     @Scheduled(cron = "0 0/1 * * * *")
     public void sendMessage() {
         List<NotificationTask> allByDate = taskRepository.findAllByDate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
-        logger.info("All tasks: {}", allByDate);
+        logger.info("All message: {}", allByDate);
         allByDate.forEach(notificationTask -> {
             SendMessage message = new SendMessage(notificationTask.getUserId(), notificationTask.getText());
             SendResponse sendResponse = telegramBot.execute(message);
             if (sendResponse.isOk()) {
                 taskRepository.deleteById(notificationTask.getId());
             } else {
-                logger.info("Message not sent, code error: {}", sendResponse.errorCode());
+                logger.info("Message can not sent, code has error: {}", sendResponse.errorCode());
             }
 
         });

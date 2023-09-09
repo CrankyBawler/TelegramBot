@@ -41,6 +41,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     @Override
     public int process(List<Update> updates) {
         updates.forEach(update -> {
+            saveDateAndTime(updates);
             logger.info("Processing update: {}", update);
             // Process your updates here
             String startMessage = update.message().text();

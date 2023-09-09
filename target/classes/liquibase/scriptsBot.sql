@@ -1,10 +1,12 @@
 -- liquebase formatted sql
 
-
 --changeset lBorisov:1
-CREATE TABLE notification_task (
-                                   id SERIAL NOT NULL,
-                                   chat_id SERIAL NOT NULL,
-                                   tast_text TEXT NOT NULL,
-                                   perform_date TIMESTAMP NOT NULL
+create schema telegramm_bot;
+--changeset lBorisov:2
+create table notification_task
+(
+    id bigSerial primary key ,
+    user_id bigInt not null,
+    text text not null ,
+    date timestamp not null
 );
